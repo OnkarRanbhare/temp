@@ -1,0 +1,4 @@
+.view-services{
+    display: flex;
+    flex-wrap: wrap;
+}

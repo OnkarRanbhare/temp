@@ -1,0 +1,4 @@
+.booking-card:hover{
+    box-shadow: 2px 2px 15px 2px rgb(188, 188, 188);
+    /* border: none; */
+}
