@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import UserRow from '../../Components/UserRow'
+import { MdDelete } from 'react-icons/md'
+
 function ManageUsers() {
 
   // const [userInfo,setUserInfo] = useState({firstName:"", lastName:"", email:"", phone:"", password:"", address:""})
   const [userInfo, setUserInfo] = useState(userArray)
 
-  const deleteUser=(custId)=>{
-    setUserInfo(userInfo.filter((user)=> user.custId != custId ))
+  const deleteUser = (custId) => {
+    setUserInfo(userInfo.filter((user) => user.custId != custId))
   }
 
   return (
@@ -25,7 +26,17 @@ function ManageUsers() {
           </thead>
           <tbody className=''>
             {
-              userInfo.map((user) => <UserRow key={user.custId} user={user} deleteUser={deleteUser}/>)
+              // userInfo.map((user) => <UserRow key={user.custId} user={user} deleteUser={deleteUser}/>)
+              userInfo.map((user) =>
+                <tr>
+                  <td>{user.custId}</td>
+                  <td>{user.firstName + " " + user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.address}</td>
+                  <td><MdDelete color='red' className='cursor-pointer' onClick={() => deleteUser(user.custId)} /></td>
+                </tr>
+              )
             }
           </tbody>
         </table>

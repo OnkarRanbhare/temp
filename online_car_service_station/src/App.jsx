@@ -12,11 +12,13 @@ import ManageServices from './Pages/Admin/ManageServices.jsx'
 import ManageBookings from './Pages/Admin/ManageBookings.jsx'
 import SpareParts from './Pages/Admin/SpareParts.jsx'
 import ManageUsers from './Pages/Admin/ManageUsers.jsx'
+import Footer from './Components/Footer.jsx'
 function App() {
  
 
   return (
     <>
+
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -31,6 +33,7 @@ function App() {
         <Route path='/spare-parts' element={<SpareParts/>}/>
         <Route path='/manage-customers' element={<ManageUsers/>}/>
       </Routes>
+      <Footer/>
     </>
   )
 }

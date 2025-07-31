@@ -1,11 +1,7 @@
-
-import { MdCancel } from "react-icons/md";
 import '../css/Booking.css'
-import { useState } from "react";
-import { getRole } from "../Utils/jwtUtil";
 
-function Booking({ booking }) {
 
+function Booking({ booking, handleStatus }) {
 
     return (
         <div className="card m-2 booking-card w-sm-100">
@@ -26,17 +22,18 @@ function Booking({ booking }) {
                 </div>
                 <div className="text-end">
                     {
-                        booking.bookingStatus === "Confirmed" &&
-                        (<button className="btn btn-warning" onClick={() => handleCancel(booking.bookingId)}>Cancel</button>)
+                        !(booking.bookingStatus === 'canceled' || booking.paymentStatus === 'paid') &&
+
+                        <select className="form-select"
+                            value={booking.bookingStatus}
+                            onChange={(e) => handleStatus(booking.bookingId, e.target.value)}>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="inprogress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+
+
                     }
-
-                    {
-                        booking.bookingStatus === "Completed" && booking.paymentStatus !== "Paid" &&
-                        (<button className="btn btn-success mt-2" onClick={() => handlePayment(booking.bookingId)}> Pay Now </button>)
-                    }
-
-
-
                 </div>
 
             </div>
@@ -50,11 +47,13 @@ export default Booking
 
 const getStatusClass = (status) => {
     switch (status) {
-        case "Completed":
+        case "completed":
             return "bg-success";
-        case "Confirmed":
+        case "inprogress":
+            return "bg-primary"
+        case "confirmed":
             return "bg-warning text-dark";
-        case "Cancelled":
+        case "cancelled":
             return "bg-danger";
         default:
             return "bg-secondary";

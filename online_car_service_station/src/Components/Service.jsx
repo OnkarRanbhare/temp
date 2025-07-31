@@ -6,19 +6,19 @@ import { SiTicktick } from "react-icons/si";
 
 import { getRole } from '../Utils/jwtUtil'
 
-function Service({ service }) {
+function Service({ service, isSelected, onToggle }) {
 
   const handlePlus = () => {
 
   }
-  const handleTick = ()=>{
+  const handleTick = () => {
 
   }
-  const handleEdit = ()=>{
+  const handleEdit = () => {
 
   }
-  const handleDelete=()=>{
-    
+  const handleDelete = () => {
+
   }
 
   return (
@@ -31,15 +31,21 @@ function Service({ service }) {
       <div className='col-2'>&#x20B9;{service.price}</div>
       {/* <div className='col-2 plus text-end' onClick={handleClick}> */}
       <div className='col-3 plus text-end'>
-        {/* <img src={isSelected ? CrossIcon : AddIcon} style={{ width: '30px' }} alt="toggle-icon" /> */}
-        {/* { getRole()=='customer'? (*/}
-        <FaPlus color='green' size={"35px"} onClick={handlePlus} />
-        <SiTicktick size={'35px'} color='green' onClick={handleTick}/>
-        {/* ): ( }*/}
-        <MdEdit size={'35px'} color='blue' onClick={handleEdit}/>
-        <MdDelete size={'35px'} color='red' onClick={handleDelete}/>
-        {/* ) */}
-
+        {
+          getRole() === 'customer' ?
+            <>
+              {isSelected ?
+                <SiTicktick size={'35px'} color='#00ff2aff' onClick={onToggle} />
+                :
+                <FaPlus color='#1b892dff' size={'35px'} onClick={onToggle} />
+              }
+            </>
+            :
+            <>
+              <MdEdit size={'35px'} color='blue' onClick={handleEdit} />
+              <MdDelete size={'35px'} color='red' onClick={handleDelete} />
+            </>
+        }
       </div>
     </div>
   )
